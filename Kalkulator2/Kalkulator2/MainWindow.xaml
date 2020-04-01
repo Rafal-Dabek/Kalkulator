@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kalkulator2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
         <Button x:Name="b7" HorizontalAlignment="Left" Margin="46,107,0,0" VerticalAlignment="Top" Width="75" Height="55" Content="7" Click="Button_Click_7" />
         <Button x:Name="b8" HorizontalAlignment="Left" Margin="161,107,0,0" VerticalAlignment="Top" Width="75" Height="55" Content="8" Click="Button_Click_8"/>

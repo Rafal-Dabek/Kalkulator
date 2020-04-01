@@ -33,7 +33,8 @@ namespace Kalkulator2
         double FirstNumber;
         string Operation;
         bool is_comma_pressed = false;
-       
+        bool is_eq_pressed = false;
+        double SecondNumber;
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -182,7 +183,7 @@ namespace Kalkulator2
                 {
                     if (result.Text.EndsWith(",")) is_comma_pressed = false;
                     result.Text = result.Text.Remove(txtlength - 1);
-
+                    FirstNumber = double.Parse(result.Text);
 
                 }
                 else
@@ -199,7 +200,8 @@ namespace Kalkulator2
         private void bclear_Click(object sender, RoutedEventArgs e)   //czyści wyświetlacz
         {
             result.Text = "0";
-            is_comma_pressed = false;
+            is_comma_pressed = result.Text.Contains(",");
+            FirstNumber = 0;
         }
 
 
@@ -217,7 +219,8 @@ namespace Kalkulator2
             FirstNumber = Convert.ToDouble(result.Text);
             result.Text = "0";
             Operation = "+";
-            is_comma_pressed = false;
+            is_comma_pressed = result.Text.Contains(",");
+            is_eq_pressed = false;
         }
 
 
@@ -227,7 +230,8 @@ namespace Kalkulator2
             FirstNumber = Convert.ToDouble(result.Text);
             result.Text = "0";
             Operation = "-";
-            is_comma_pressed = false;
+            is_comma_pressed = result.Text.Contains(",");
+            is_eq_pressed = false;
         }
 
         private void bmult(object sender, RoutedEventArgs e)
@@ -235,7 +239,8 @@ namespace Kalkulator2
             FirstNumber = Convert.ToDouble(result.Text);
             result.Text = "0";
             Operation = "*";
-            is_comma_pressed = false;
+            is_comma_pressed = result.Text.Contains(",");
+            is_eq_pressed = false;
         }
 
 
@@ -249,7 +254,7 @@ namespace Kalkulator2
             if (is_comma_pressed == false)
             {
                 result.Text = result.Text + ",";
-                is_comma_pressed = true;
+                is_comma_pressed = result.Text.Contains(",");
             }
         }
 
@@ -258,15 +263,18 @@ namespace Kalkulator2
             FirstNumber = Convert.ToDouble(result.Text);
             result.Text = "0";
             Operation = "/";
-            is_comma_pressed = false;
+            is_comma_pressed = result.Text.Contains(",");
+            is_eq_pressed = false;
         }
 
         private void b_equal(object sender, RoutedEventArgs e)
         {
-            double SecondNumber;
+            
             double Result;
-
-            SecondNumber = Convert.ToDouble(result.Text);
+           // is_eq_pressed = true;
+            
+            if (!is_eq_pressed)SecondNumber = Convert.ToDouble(result.Text);
+            is_eq_pressed = true;
 
             if (Operation == "+")
             {
@@ -274,19 +282,22 @@ namespace Kalkulator2
                 Result = (FirstNumber + SecondNumber);
                 result.Text = Convert.ToString(Result);
                 FirstNumber = Result;
-                //result.Text = Result.ToString();
+                is_comma_pressed = result.Text.Contains(",");
+               
             }
             if (Operation == "-")
             {
                 Result = (FirstNumber - SecondNumber);
                 result.Text = Convert.ToString(Result);
                 FirstNumber = Result;
+                is_comma_pressed = result.Text.Contains(",");
             }
             if (Operation == "*")
             {
                 Result = (FirstNumber * SecondNumber);
                 result.Text = Convert.ToString(Result);
                 FirstNumber = Result;
+                is_comma_pressed = result.Text.Contains(",");
             }
             if (Operation == "/")
             {
@@ -303,6 +314,7 @@ namespace Kalkulator2
                     Result = (FirstNumber / SecondNumber);
                     result.Text = Convert.ToString(Result);
                     FirstNumber = Result;
+                    is_comma_pressed = result.Text.Contains(",");
                 }
             }
         }
